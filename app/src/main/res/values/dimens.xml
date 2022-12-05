@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="magin_regular">16dp</dimen>
+    <dimen name="margin_top">60dp</dimen>
+    <dimen name="counter_text_size">30sp</dimen>
+</resources>
