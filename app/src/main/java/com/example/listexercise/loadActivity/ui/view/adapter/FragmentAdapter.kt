@@ -1,4 +1,4 @@
-package com.example.listexercise.loadActivity.ui.view
+package com.example.listexercise.loadActivity.ui.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,15 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listexercise.R
 import com.example.listexercise.databinding.ListGobBinding
-import com.example.listexercise.loadActivity.data.model.ListResult
+import com.example.listexercise.loadActivity.domain.model.GobModel
 
-class FragmentAdapter(private var gobRest: List<ListResult>,
-                      private var page: Int):
+class FragmentAdapter(private var gobRest: List<GobModel>,
+                      private var click : (GobModel)->Unit):
 RecyclerView.Adapter<FragmentAdapter.ViewHolder>(){
+    var listResult = GobModel()
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val mBinding = ListGobBinding.bind(view)
 
-        fun bindView(gobRest: ListResult){
+        fun bindView(gobRest: GobModel){
             with(mBinding) {
                 tvId.text = ("Id:${gobRest.id}")
                 tvFact.text = ("Fact: ${gobRest.fact}")
@@ -22,13 +23,14 @@ RecyclerView.Adapter<FragmentAdapter.ViewHolder>(){
                 tvUrl.text = ("Url: ${gobRest.url}")
             }
         }
+        fun getGob(click:(GobModel)->Unit){
+            mBinding.root.setOnClickListener {
+                click(gobRest[adapterPosition])
+            }
+        }
     }
-    fun setStores(gobRest: List<ListResult>) {
-        this.gobRest = gobRest
-        notifyDataSetChanged()
-    }
-    fun pagination(page: Int){
-        this.page = page
+    fun setList(list: List<GobModel>) {
+        this.gobRest=list
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,11 +39,15 @@ RecyclerView.Adapter<FragmentAdapter.ViewHolder>(){
         return ViewHolder(view)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val gobRestfull = gobRest[position+page]
+        val gobRestfull = gobRest[position]
         with(holder){
-            mBinding.tvResult.text=((position+page)+1).toString()
+            mBinding.tvResult.text=((position)+1).toString()
             bindView(gobRestfull)
+            getGob(click)
+            listResult=gobRestfull
         }
     }
-    override fun getItemCount(): Int = gobRest.size-90
+    override fun getItemCount(): Int = gobRest.size
+
+
 }

@@ -1,8 +1,7 @@
 package com.example.listexercise.loadActivity.domain
 
 import com.example.listexercise.loadActivity.data.Repository
-import com.example.listexercise.loadActivity.data.model.CacheGob
-import com.example.listexercise.loadActivity.data.model.GobRest
+import com.example.listexercise.loadActivity.domain.model.GobModel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -23,19 +22,9 @@ internal class GetGobUseCaseTest {
         getGobUseCase=GetGobUseCase(repo)
     }
     @Test
-    fun whenTheResponseBeEmptyThenUseTheCache() = runBlocking {
-        //Given
-        coEvery { repo.getInfoGob()} returns CacheGob.gobCache
-        //When
-        var response = getGobUseCase()
-        //Then
-        coVerify(exactly = 1) { response }
-        assert(response==CacheGob.gobCache)
-    }
-    @Test
     fun verifyResponseNotNullWhenTheApiFail() = runBlocking {
         //Given
-        coEvery { repo.getInfoGob()} returns CacheGob.gobCache
+        coEvery { repo.getInfoGob()} returns listOf()
         //When
         var response = getGobUseCase()
         //Then
