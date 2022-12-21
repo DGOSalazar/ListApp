@@ -117,6 +117,8 @@ class MainActivity : AppCompatActivity(){
         launchList()
     }
 
+
+    //
     private fun checkInternetPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.INTERNET)

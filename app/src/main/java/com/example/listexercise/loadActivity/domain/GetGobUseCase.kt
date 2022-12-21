@@ -10,10 +10,10 @@ class GetGobUseCase @Inject constructor(
 ){
     suspend operator fun invoke(): List<GobModel>{
         var gobModel = repository.getInfoGob()
-        return if (gobModel.isNotEmpty()){
-            //repository.clearDatabase()
-            //repository.insertApiToDatabase(gobModel.map { it.toDomain() })
+        var gobModelLocal = repository.getInfoGobDaoFull()
+        return if (gobModel.isNotEmpty() and gobModelLocal.isEmpty()){
+            repository.insertApiToDatabase(gobModel.map { it.toDomain() })
             gobModel
-        }else repository.getInfoGobDao(id=5600)
+        }else repository.getInfoGobDaoFull()
     }
 }

@@ -9,8 +9,8 @@ import com.example.listexercise.loadActivity.data.database.entities.ListResultQu
 @Dao
 interface Queries {
     //Se que esto es horrible xD
-    @Query("SELECT * FROM gob_table WHERE identity= '5601'+:id or identity='5602'+:id or identity='5603'+:id or identity= '5604'+:id or identity= '5605'+:id or identity= '5606'+:id or identity='5607'+:id or identity= '5608'+:id or identity= '5609'+:id or identity='5610' ORDER BY identity ASC LIMIT 10")
-    suspend fun getAllQuotes(id:Int):List<ListResultQuote>
+    @Query("SELECT * FROM gob_table WHERE identity BETWEEN 1+:id and 10+:id ORDER BY identity ASC LIMIT 10")
+    suspend fun getQuotesPage(id:Int):List<ListResultQuote>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<ListResultQuote>)
@@ -20,4 +20,7 @@ interface Queries {
 
     @Query("SELECT * FROM gob_table WHERE slug=:org")
     suspend fun findByOrg(org: String): List<ListResultQuote>
+
+    @Query("SELECT * FROM gob_table")
+    suspend fun getAllQuotes():List<ListResultQuote>
 }

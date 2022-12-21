@@ -17,7 +17,11 @@ class Repository @Inject constructor(
         return response.map { it.toDomain() }
     }
     suspend fun getInfoGobDao(id:Int): List<GobModel>{
-        var response: List<ListResultQuote> = dao.getAllQuotes(id)
+        var response: List<ListResultQuote> = dao.getQuotesPage(id)
+        return response.map { it.toDomain() }
+    }
+    suspend fun getInfoGobDaoFull(): List<GobModel>{
+        var response: List<ListResultQuote> = dao.getAllQuotes()
         return response.map { it.toDomain() }
     }
     suspend fun insertApiToDatabase(gob: List<ListResultQuote>){
