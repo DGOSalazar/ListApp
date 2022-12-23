@@ -1,4 +1,4 @@
-package com.example.listexercise.loadActivity.data.model
+package com.example.listexercise.loadActivity.data.network.model
 import com.google.gson.annotations.SerializedName
 
 data class ListResult(@SerializedName("_id") var id : String="",
@@ -11,4 +11,5 @@ data class ListResult(@SerializedName("_id") var id : String="",
                       @SerializedName("url") var url : String="",
                       @SerializedName("operations") var operations : String="",
                       @SerializedName("dataset") var dataset : String="",
-                      @SerializedName("created_at") var created_at : String="")
+                      @SerializedName("created_at") var created_at : String="",
+                      @SerializedName("statusError") var statusError:String="")

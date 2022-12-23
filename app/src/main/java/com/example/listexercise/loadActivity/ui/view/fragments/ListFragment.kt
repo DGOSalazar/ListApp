@@ -1,45 +1,40 @@
-package com.example.listexercise.loadActivity.ui.view
+package com.example.listexercise.loadActivity.ui.view.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.example.listexercise.R
 import com.example.listexercise.databinding.FragmentListBinding
-import com.example.listexercise.loadActivity.data.model.ListResult
 import com.example.listexercise.loadActivity.domain.model.GobModel
-import com.example.listexercise.loadActivity.ui.view.adapter.FragmentAdapter
 import com.example.listexercise.loadActivity.ui.viewModel.MainViewModel
 
-class ListFragment : Fragment(R.layout.fragment_list) {
+class ListFragment : Fragment(R.layout.fragment_list), View.OnClickListener {
     private lateinit var mBinding: FragmentListBinding
     private val mainViewModel : MainViewModel by activityViewModels()
+    private var gobData = GobModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View {
         mBinding = FragmentListBinding.inflate(inflater,container,false)
         return mBinding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var data = GobModel()
-        mainViewModel.model.observe(viewLifecycleOwner, Observer {
+        mainViewModel.gobData.observe(viewLifecycleOwner){
             printData(it)
-            data=it
-        })
-        mBinding.btSend.setOnClickListener{
-            sendMessage(data.toString())
+            gobData=it
         }
+        mBinding.btSend.setOnClickListener(this)
+        mBinding.ibBack.setOnClickListener(this)
     }
+    @SuppressLint("SetTextI18n")
     private fun printData(result: GobModel){
         with(mBinding){
             tvId.text = ("${getString(R.string.id)}${result.id}")
@@ -63,10 +58,13 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         // Starting Whatsapp
         startActivity(intent)
     }
-    private fun toastResponse(text: String){
-        Toast.makeText(mBinding.root.context, text, Toast.LENGTH_SHORT).show()
-    }
-    override fun onDestroy(){
-        super.onDestroy()
+    override fun onClick(v:View?){
+        v?.let {
+            when(it){
+                mBinding.ibBack -> activity?.onBackPressed()
+                mBinding.btSend -> sendMessage(gobData.toString())
+                else-> print(getString(R.string.toastPermission_denied))
+            }
+        }
     }
 }

@@ -10,16 +10,10 @@ import com.example.listexercise.loadActivity.data.database.entities.ListResultQu
 interface Queries {
     //Se que esto es horrible xD
     @Query("SELECT * FROM gob_table WHERE identity BETWEEN 1+:id and 10+:id ORDER BY identity ASC LIMIT 10")
-    suspend fun getQuotesPage(id:Int):List<ListResultQuote>
+    suspend fun getGobPage(id:Int):List<ListResultQuote>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<ListResultQuote>)
-
-    @Query("DELETE FROM gob_table")
-    suspend fun deleteAll()
-
-    @Query("SELECT * FROM gob_table WHERE slug=:org")
-    suspend fun findByOrg(org: String): List<ListResultQuote>
 
     @Query("SELECT * FROM gob_table")
     suspend fun getAllQuotes():List<ListResultQuote>

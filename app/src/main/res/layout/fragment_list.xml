@@ -4,11 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".loadActivity.ui.view.ListFragment"
-    android:background="@color/purple_700"
+    tools:context=".loadActivity.ui.view.fragments.ListFragment"
+    android:background="@color/white"
     android:layout_marginStart="@dimen/magin_regular"
     android:layout_marginEnd="@dimen/magin_regular"
     >
+
+    <ImageView
+        android:id="@+id/ib_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/magin_regular"
+        android:clickable="true"
+        />
     <TextView
         android:id="@+id/tv_result"
         android:layout_width="match_parent"

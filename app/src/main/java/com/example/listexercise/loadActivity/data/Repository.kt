@@ -2,7 +2,7 @@ package com.example.listexercise.loadActivity.data
 
 import com.example.listexercise.loadActivity.data.database.dao.Queries
 import com.example.listexercise.loadActivity.data.database.entities.ListResultQuote
-import com.example.listexercise.loadActivity.data.model.ListResult
+import com.example.listexercise.loadActivity.data.network.model.ListResult
 import com.example.listexercise.loadActivity.data.network.GobService
 import com.example.listexercise.loadActivity.domain.model.GobModel
 import com.example.listexercise.loadActivity.domain.model.toDomain
@@ -17,7 +17,7 @@ class Repository @Inject constructor(
         return response.map { it.toDomain() }
     }
     suspend fun getInfoGobDao(id:Int): List<GobModel>{
-        var response: List<ListResultQuote> = dao.getQuotesPage(id)
+        var response: List<ListResultQuote> = dao.getGobPage(id)
         return response.map { it.toDomain() }
     }
     suspend fun getInfoGobDaoFull(): List<GobModel>{
@@ -27,11 +27,5 @@ class Repository @Inject constructor(
     suspend fun insertApiToDatabase(gob: List<ListResultQuote>){
         dao.insertAll(gob)
     }
-    suspend fun clearDatabase(){
-        dao.deleteAll()
-    }
-    suspend fun findOrg(org:String): List<GobModel>{
-        var response = dao.findByOrg(org)
-        return response.map { it.toDomain() }
-    }
+
 }

@@ -5,8 +5,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -18,7 +20,15 @@ object NetworkModule{
     fun provideRetrofit(): Retrofit {
         return retrofit2.Retrofit.Builder()
             .baseUrl("https://api.datos.gob.mx/v1/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(getClient())
+            .build()
+    }
+    private fun getClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .build()
     }
     @Singleton
     @Provides

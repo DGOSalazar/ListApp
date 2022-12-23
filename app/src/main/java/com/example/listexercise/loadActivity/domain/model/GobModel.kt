@@ -1,7 +1,7 @@
 package com.example.listexercise.loadActivity.domain.model
 
 import com.example.listexercise.loadActivity.data.database.entities.ListResultQuote
-import com.example.listexercise.loadActivity.data.model.ListResult
+import com.example.listexercise.loadActivity.data.network.model.ListResult
 
 data class GobModel(var id : String="",
                     var date_insert : String ="",
@@ -13,7 +13,8 @@ data class GobModel(var id : String="",
                     var url : String="",
                     var operations : String="",
                     var dataset : String="",
-                    var created_at : String="")
+                    var created_at : String="",
+                    var statusError:String ="")
 fun ListResult.toDomain() =
     GobModel(id,date_insert,slug,columns,fact,organization,date_insert,dataset,url,operations,created_at)
 fun ListResultQuote.toDomain() =
