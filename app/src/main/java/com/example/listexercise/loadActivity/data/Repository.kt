@@ -13,15 +13,15 @@ class Repository @Inject constructor(
     private val dao : Queries
 ) {
     suspend fun getInfoGob(): List<GobModel> {
-        var response: List<ListResult> = api.getGobServices().gobEntity
+        val response: List<ListResult> = api.getGobServices().gobEntity
         return response.map { it.toDomain() }
     }
     suspend fun getInfoGobDao(id:Int): List<GobModel>{
-        var response: List<ListResultQuote> = dao.getGobPage(id)
+        val response: List<ListResultQuote> = dao.getGobPage(id)
         return response.map { it.toDomain() }
     }
     suspend fun getInfoGobDaoFull(): List<GobModel>{
-        var response: List<ListResultQuote> = dao.getAllQuotes()
+        val response: List<ListResultQuote> = dao.getAllQuotes()
         return response.map { it.toDomain() }
     }
     suspend fun insertApiToDatabase(gob: List<ListResultQuote>){

@@ -18,7 +18,7 @@ object NetworkModule{
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit {
-        return retrofit2.Retrofit.Builder()
+        return Retrofit.Builder()
             .baseUrl("https://api.datos.gob.mx/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(getClient())

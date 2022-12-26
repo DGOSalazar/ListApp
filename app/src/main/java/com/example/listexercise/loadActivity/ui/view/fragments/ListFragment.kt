@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.example.listexercise.R
 import com.example.listexercise.databinding.FragmentListBinding
 import com.example.listexercise.loadActivity.domain.model.GobModel

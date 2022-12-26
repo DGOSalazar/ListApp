@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         >
         <EditText
+            android:autofillHints="name"
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:maxLines="1"
+            android:inputType="text"
             android:layout_marginStart="@dimen/magin_regular"
             android:layout_marginEnd="@dimen/magin_regular"
             android:clickable="true"

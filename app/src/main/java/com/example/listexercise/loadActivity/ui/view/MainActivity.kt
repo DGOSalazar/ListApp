@@ -1,28 +1,17 @@
 package com.example.listexercise.loadActivity.ui.view
 
 import android.Manifest
-import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.listexercise.R
-import com.example.listexercise.loadActivity.ui.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 const val INTERNET_REQUEST_CODE = 1234
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
-
-    private lateinit var alertBuilder : AlertDialog.Builder
-    private val mainViewModel:MainViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

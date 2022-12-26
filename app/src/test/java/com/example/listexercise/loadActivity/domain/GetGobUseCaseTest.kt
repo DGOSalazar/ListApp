@@ -10,9 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-
 internal class GetGobUseCaseTest {
-
     @RelaxedMockK
     private lateinit var repo : Repository
     private lateinit var getGobUseCase:GetGobUseCase
