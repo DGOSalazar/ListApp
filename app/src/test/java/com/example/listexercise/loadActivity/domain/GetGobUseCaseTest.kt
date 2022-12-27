@@ -20,12 +20,12 @@ internal class GetGobUseCaseTest {
         getGobUseCase=GetGobUseCase(repo)
     }
     @Test
-    fun verifyResponseNotNullWhenTheApiFail() = runBlocking {
+    fun whenTheApiNotReturnAnythingGetFromDatabase() = runBlocking {
         //Given
-        coEvery { repo.getInfoGob()} returns listOf()
+        coEvery { repo.getInfoGob()} returns emptyList()
         //When
-        var response = getGobUseCase()
+        getGobUseCase()
         //Then
-        assert(response!=null)
+        coVerify(exactly = 1) { repo.getInfoGobDaoFull() }
     }
 }

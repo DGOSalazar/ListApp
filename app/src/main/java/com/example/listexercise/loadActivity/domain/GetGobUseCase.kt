@@ -11,6 +11,7 @@ class GetGobUseCase @Inject constructor(
     suspend operator fun invoke(): List<GobModel>{
         val gobModel = repository.getInfoGob()
         val gobModelLocal = repository.getInfoGobDaoFull()
+
         return if (gobModel.isNotEmpty() and gobModelLocal.isEmpty()){
             repository.insertApiToDatabase(gobModel.map { it.toDomain() })
             gobModel
