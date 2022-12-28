@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt'
+    id "org.sonarqube" version "3.0"
 }
 
 android {
@@ -17,7 +18,17 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    sonarqube {
+        properties {
+            property "sonar.projectName", "ListApp"
+            property "sonar.projectKey", "list_app001:ok.200"
+            property "sonar.host","http://localhost:9000"
+            property "sonar.login", "45a210dc2010b28c05c9466fe79ca86d71224a32"
+            property "sonar.sources","src/main/java"
+            property "sonar.language","java"
+            property "sonar.sourceEncoding", "UTF-8"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -53,10 +64,7 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$room_version"
-    //Glide
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
 ///////////////////////////////////////////////////////////////////////////////////
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")

@@ -17,4 +17,6 @@ class GetGobUseCase @Inject constructor(
             gobModel
         }else gobModelLocal
     }
+
+
 }

@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
         checkInternetPermission()
     }
+
     private fun toastResponse(text: String){
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
