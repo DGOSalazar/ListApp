@@ -1,6 +1,7 @@
 package com.example.listexercise.loadActivity.domain
 
 import com.example.listexercise.loadActivity.data.Repository
+import com.example.listexercise.loadActivity.data.network.model.ListResult
 import com.example.listexercise.loadActivity.domain.model.GobModel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -27,5 +28,15 @@ internal class GetGobUseCaseTest {
         getGobUseCase()
         //Then
         coVerify(exactly = 1) { repo.getInfoGobDaoFull() }
+    }
+    @Test
+    fun whenTheApiIsOkReturnAnythingGetFromApi() = runBlocking {
+        var listFromApi = listOf(GobModel())
+        //Given
+        coEvery { repo.getInfoGob() } returns listFromApi
+        //When
+        getGobUseCase()
+        //Then
+        coVerify(exactly = 1) { repo.getInfoGob() }
     }
 }

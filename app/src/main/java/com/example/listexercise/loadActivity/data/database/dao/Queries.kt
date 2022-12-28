@@ -8,7 +8,7 @@ import com.example.listexercise.loadActivity.data.database.entities.ListResultQu
 
 @Dao
 interface Queries {
-    @Query("SELECT * FROM gob_table WHERE identity BETWEEN 1+:id and 10+:id ORDER BY identity ASC LIMIT 10")
+    @Query("SELECT * FROM gob_table WHERE identity > :id ORDER BY identity ASC LIMIT 10")
     suspend fun getGobPage(id:Int):List<ListResultQuote>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
